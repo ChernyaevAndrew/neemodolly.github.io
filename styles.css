@@ -630,3 +630,78 @@ model-viewer {
     scroll-behavior: auto !important;
   }
 }
+
+/* TOUCH THE CAT */
+
+.touch-hint {
+  position: absolute;
+  z-index: 4;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  width: max-content;
+  max-width: 95%;
+  padding: 13px 20px;
+  border: 1px solid rgba(233,255,54,.3);
+  border-radius: 8px;
+  background: rgba(12,14,9,.82);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 30px rgba(233,255,54,.07);
+  pointer-events: none;
+  animation: hint-glow 2.5s ease-in-out infinite;
+}
+
+.touch-icon {
+  font-size: 25px;
+  color: #e9ff36;
+  animation: touch-bounce 1.5s ease-in-out infinite;
+}
+
+.touch-hint div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.touch-hint strong {
+  color: #e9ff36;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.touch-hint small {
+  color: #b4b5a9;
+  font-size: 10px;
+}
+
+.sound-wave {
+  color: #e9ff36;
+  font-size: 22px;
+  margin-left: 5px;
+}
+
+@keyframes touch-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes hint-glow {
+  0%, 100% { border-color: rgba(233,255,54,.2); }
+  50% { border-color: rgba(233,255,54,.65); }
+}
+
+@media (max-width: 680px) {
+  .touch-hint {
+    bottom: 10%;
+    padding: 11px 13px;
+    gap: 9px;
+  }
+
+  .touch-hint small {
+    font-size: 9px;
+  }
+}
+
