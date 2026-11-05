@@ -6,21 +6,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090a08">
   <meta name="description" content="Banana Cat — interactive 3D character experience">
+
   <title>BANANA CAT — 3D Experience</title>
 
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+  <!-- Styles -->
   <link rel="stylesheet" href="./styles.css">
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.4.0/model-viewer.min.js"></script>
+
+  <!-- 3D Model Viewer -->
+  <script type="module"
+    src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.4.0/model-viewer.min.js">
+  </script>
+
+  <!-- Main JavaScript -->
   <script src="./script.js" defer></script>
 </head>
 
 <body>
-  <div class="noise"></div>
 
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- NAVIGATION -->
   <header class="navbar">
+
     <a href="#" class="brand">
       <span class="brand-icon">B</span>
       <span>BANANA<span class="brand-light">CAT</span></span>
@@ -31,14 +43,23 @@
       INTERACTIVE 3D EXPERIENCE
     </div>
 
-    <a href="#character" class="nav-link">EXPLORE <span>↗</span></a>
+    <a href="#character" class="nav-link">
+      EXPLORE <span>↗</span>
+    </a>
+
   </header>
 
+
+  <!-- MAIN -->
   <main class="hero" id="character">
+
     <div class="hero-glow"></div>
     <div class="hero-grid"></div>
 
+
+    <!-- LEFT CONTENT -->
     <section class="hero-copy">
+
       <div class="eyebrow">
         <span class="eyebrow-line"></span>
         THE INTERNET'S CUTEST CREATURE
@@ -51,109 +72,179 @@
 
       <p class="description">
         Half banana. Half cat.<br>
-        100% unpredictable.
+        100% unpredictable.<br>
         Meet your new favorite 3D creature.
       </p>
 
       <div class="hero-actions">
+
         <a href="#viewer" class="primary-button">
           MEET THE CAT <span>↗</span>
         </a>
-        <span class="edition">NO. 001 / ORIGINAL CHARACTER</span>
+
+        <span class="edition">
+          NO. 001 / ORIGINAL CHARACTER
+        </span>
+
       </div>
 
       <div class="mini-stats">
+
         <div>
           <strong>3D</strong>
           <span>INTERACTIVE</span>
         </div>
+
         <div>
           <strong>360°</strong>
           <span>VIEW MODE</span>
         </div>
+
         <div>
           <strong>AR</strong>
           <span>REAL WORLD</span>
         </div>
+
       </div>
+
     </section>
 
+
+    <!-- 3D VIEWER -->
     <section class="viewer-section" id="viewer">
+
       <div class="viewer-label">
         <span>01 / LIVE MODEL</span>
         <span class="live-indicator">● LIVE</span>
       </div>
 
+
       <div class="model-wrap">
+
         <div class="model-orbit orbit-one"></div>
         <div class="model-orbit orbit-two"></div>
         <div class="model-halo"></div>
+
 
         <div class="model-tag tag-top">
           <span>✳</span> DIGITAL CREATURE
         </div>
 
+
+        <!-- BANANA CAT MODEL -->
         <model-viewer
           id="banana-model"
           src="./bananacat.glb"
           poster="./poster.webp"
           alt="3D Banana Cat character"
+
           camera-controls
           auto-rotate
           rotation-per-second="18deg"
           autoplay
+
           animation-name="bananaBones|hiiiiiiiii"
+
           shadow-intensity="1"
           exposure="1.1"
           tone-mapping="neutral"
           environment-image="neutral"
+
           camera-orbit="-8.75deg 76.5deg 3.786m"
           field-of-view="30deg"
-          interaction-prompt="auto"
-          ar
-          ar-modes="webxr scene-viewer quick-look">
 
+          interaction-prompt="auto"
+
+          ar
+          ar-modes="webxr scene-viewer quick-look"
+        >
+
+          <!-- LOADING BAR -->
           <div class="progress-container" slot="progress-bar">
+
             <div class="progress-track">
               <div class="progress-fill"></div>
             </div>
+
             <span>LOADING CHARACTER...</span>
+
           </div>
 
+
+          <!-- AR BUTTON -->
           <button slot="ar-button" id="ar-button">
             VIEW IN YOUR SPACE ↗
           </button>
-        </model-viewer>
-<div class="touch-hint" id="touch-hint">
-  <span class="touch-icon">☝</span>
-  <div>
-    <strong>TOUCH THE CAT</strong>
-    <small>Прикоснись к котику, чтобы услышать звук</small>
-  </div>
-  <span class="sound-wave">♫</span>
-</div>
 
-<audio id="cat-audio" src="./cat-sound.mp3" preload="auto"></audio>
+        </model-viewer>
+
+
+        <!-- TOUCH HINT -->
+        <div class="touch-hint" id="touch-hint">
+
+          <span class="touch-icon">☝</span>
+
+          <div>
+            <strong>TOUCH THE CAT</strong>
+            <small>Прикоснись к котику, чтобы услышать звук</small>
+          </div>
+
+          <span class="sound-wave">♫</span>
+
+        </div>
+
+
+        <!-- SOUND -->
+        <audio
+          id="cat-audio"
+          src="./cat-sound.mp3"
+          preload="auto">
+        </audio>
+
+
         <div class="model-tag tag-bottom">
           DRAG TO ROTATE <span>↻</span>
         </div>
+
       </div>
 
+
+      <!-- CONTROLS -->
       <div class="viewer-controls">
+
         <span>INTERACTION</span>
-        <button id="rotate-toggle" class="control-button">
+
+        <button
+          id="rotate-toggle"
+          class="control-button"
+          type="button"
+          aria-pressed="false">
+
           <span>Ⅱ</span> PAUSE ROTATION
+
         </button>
+
       </div>
+
     </section>
 
+
+    <!-- CHARACTER CARD -->
     <aside class="character-card">
-      <div class="card-number">CHARACTER / 001</div>
+
+      <div class="card-number">
+        CHARACTER / 001
+      </div>
 
       <div class="card-emoji">🍌</div>
 
-      <h2>Banana<br>Cat</h2>
-      <p>A rare species of adorable chaos.</p>
+      <h2>
+        Banana<br>Cat
+      </h2>
+
+      <p>
+        A rare species of adorable chaos.
+      </p>
 
       <div class="card-divider"></div>
 
@@ -161,10 +252,12 @@
         <span>RARITY</span>
         <strong>LEGENDARY</strong>
       </div>
+
       <div class="attribute">
         <span>MOOD</span>
         <strong>HAPPY</strong>
       </div>
+
       <div class="attribute">
         <span>SPECIES</span>
         <strong>CAT / BANANA</strong>
@@ -174,13 +267,22 @@
         <span>EST. 2025</span>
         <span>★ 001</span>
       </div>
+
     </aside>
 
+
+    <!-- BOTTOM -->
     <div class="bottom-note">
+
       <span>SCROLL TO EXPLORE</span>
+
       <span class="scroll-line"></span>
+
       <span>MADE FOR THE INTERNET</span>
+
     </div>
+
   </main>
+
 </body>
 </html>
