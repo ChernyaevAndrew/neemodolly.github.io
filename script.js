@@ -4,98 +4,36 @@ document.addEventListener('DOMContentLoaded', () => {
   const progress = document.querySelector('.progress-container');
   const progressFill = document.querySelector('.progress-fill');
   const rotateButton = document.querySelector('#rotate-toggle');
+  const catAudio = document.querySelector('#cat-audio');
 
   if (!model) return;
 
-  // Audio engine
-  let audioContext = null;
+  // CUSTOM CAT SOUND
   let lastSound = 0;
 
   function playCatSound() {
+    if (!catAudio) return;
+
     const now = Date.now();
 
-    // Prevent sound spam
-    if (now - lastSound < 250) return;
+    // Small delay between sounds
+    if (now - lastSound < 400) return;
+
     lastSound = now;
 
-    try {
-      if (!audioContext) {
-        audioContext = new (
-          window.AudioContext || window.webkitAudioContext
-        )();
-      }
+    catAudio.pause();
+    catAudio.currentTime = 0;
 
-      if (audioContext.state === 'suspended') {
-        audioContext.resume();
-      }
-
-      const ctx = audioContext;
-      const time = ctx.currentTime;
-
-      // Main meow oscillator
-      const oscillator = ctx.createOscillator();
-      const volume = ctx.createGain();
-
-      oscillator.type = 'sine';
-
-      oscillator.frequency.setValueAtTime(620, time);
-      oscillator.frequency.exponentialRampToValueAtTime(
-        950, time + 0.09
-      );
-      oscillator.frequency.exponentialRampToValueAtTime(
-        430, time + 0.25
-      );
-      oscillator.frequency.exponentialRampToValueAtTime(
-        550, time + 0.38
-      );
-
-      // Sound envelope
-      volume.gain.setValueAtTime(0.001, time);
-      volume.gain.linearRampToValueAtTime(0.22, time + 0.04);
-      volume.gain.exponentialRampToValueAtTime(
-        0.001, time + 0.42
-      );
-
-      oscillator.connect(volume);
-      volume.connect(ctx.destination);
-
-      oscillator.start(time);
-      oscillator.stop(time + 0.43);
-
-      // Soft second harmonic
-      const second = ctx.createOscillator();
-      const secondVolume = ctx.createGain();
-
-      second.type = 'triangle';
-      second.frequency.setValueAtTime(1240, time);
-      second.frequency.exponentialRampToValueAtTime(
-        860, time + 0.3
-      );
-
-      secondVolume.gain.setValueAtTime(0.001, time);
-      secondVolume.gain.linearRampToValueAtTime(
-        0.035, time + 0.04
-      );
-      secondVolume.gain.exponentialRampToValueAtTime(
-        0.001, time + 0.3
-      );
-
-      second.connect(secondVolume);
-      secondVolume.connect(ctx.destination);
-
-      second.start(time);
-      second.stop(time + 0.32);
-
-    } catch (error) {
-      console.warn('Audio unavailable:', error);
-    }
+    catAudio.play().catch(error => {
+      console.warn('Could not play cat sound:', error);
+    });
   }
 
-  // Click on Banana Cat = MEOW!
+  // Play sound when touching the 3D model
   model.addEventListener('click', playCatSound);
 
   // Loading progress
-  model.addEventListener('progress', (event) => {
+  model.addEventListener('progress', event => {
     const percent = event.detail.totalProgress * 100;
 
     if (progressFill) {
@@ -108,7 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   model.addEventListener('load', () => {
-    if (progress) progress.classList.add('hide');
+    if (progress) {
+      progress.classList.add('hide');
+    }
   });
 
   // Rotation control
@@ -128,5 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.body.classList.add('page-loaded');
 
-  console.log('BANANA CAT experience loaded 🍌');
+  console.log('BANANA CAT loaded 🍌');
 });
+
