@@ -677,6 +677,97 @@ model-viewer {
   font-size: 10px;
 }
 
+/* MOBILE FIX — до 680px */
+@media (max-width: 680px) {
+
+  /* Увеличиваем область 3D-модели */
+  .model-wrap {
+    height: 460px;
+    min-height: 460px;
+  }
+
+  /* Подсказку поднимаем над AR-кнопкой */
+  .touch-hint {
+    bottom: 75px;
+    left: 50%;
+    width: calc(100% - 24px);
+    max-width: 360px;
+    padding: 11px 12px;
+    gap: 9px;
+    transform: translateX(-50%);
+  }
+
+  .touch-hint strong {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
+
+  .touch-hint small {
+    font-size: 9px;
+    line-height: 1.4;
+  }
+
+  /* Убираем подпись, которая мешает кнопкам */
+  .tag-bottom {
+    display: none;
+  }
+
+  /* AR-кнопка */
+  #ar-button {
+    bottom: 12px;
+    max-width: calc(100% - 24px);
+    padding: 11px 12px;
+    font-size: 8px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* Нижняя панель управления */
+  .viewer-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    padding-top: 15px;
+  }
+
+  .control-button {
+    padding: 10px;
+    font-size: 8px;
+  }
+
+  /* Нижняя подпись сайта */
+  .bottom-note {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    margin: 35px 0 15px;
+    flex-wrap: wrap;
+  }
+
+}
+
+/* Очень узкие экраны */
+@media (max-width: 380px) {
+  .touch-hint {
+    gap: 6px;
+    padding: 9px;
+  }
+
+  .touch-icon {
+    font-size: 20px;
+  }
+
+  .sound-wave {
+    font-size: 18px;
+  }
+
+  .touch-hint small {
+    font-size: 8px;
+  }
+}
+
 .sound-wave {
   color: #e9ff36;
   font-size: 22px;
