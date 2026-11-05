@@ -1,27 +1,177 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>&lt;model-viewer&gt; template</title>
-    <meta charset="utf-8">
-    <meta name="description" content="&lt;model-viewer&gt; template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" href="./styles.css" rel="stylesheet"/>
-  </head>
-  <body>
-    <!-- <model-viewer> HTML element -->
-    <model-viewer src="bananacat.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="poster.webp" shadow-intensity="1" autoplay animation-name="bananaBones|hiiiiiiiii" auto-rotate camera-orbit="-8.75deg 76.5deg 3.786m" field-of-view="30deg" exposure="0.66">
-      <div class="progress-bar hide" slot="progress-bar">
-          <div class="update-bar"></div>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090a08">
+  <meta name="description" content="Banana Cat — interactive 3D character experience">
+  <title>BANANA CAT — 3D Experience</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.4.0/model-viewer.min.js"></script>
+  <script src="./script.js" defer></script>
+</head>
+
+<body>
+  <div class="noise"></div>
+
+  <header class="navbar">
+    <a href="#" class="brand">
+      <span class="brand-icon">B</span>
+      <span>BANANA<span class="brand-light">CAT</span></span>
+    </a>
+
+    <div class="nav-status">
+      <span class="status-dot"></span>
+      INTERACTIVE 3D EXPERIENCE
+    </div>
+
+    <a href="#character" class="nav-link">EXPLORE <span>↗</span></a>
+  </header>
+
+  <main class="hero" id="character">
+    <div class="hero-glow"></div>
+    <div class="hero-grid"></div>
+
+    <section class="hero-copy">
+      <div class="eyebrow">
+        <span class="eyebrow-line"></span>
+        THE INTERNET'S CUTEST CREATURE
       </div>
-      <button slot="ar-button" id="ar-button">
-          View in your space
-      </button>
-      <div id="ar-prompt">
-          <img src="ar_hand_prompt.png">
+
+      <h1>
+        BANANA<br>
+        <span class="outline-text">CAT</span><span class="yellow-dot">.</span>
+      </h1>
+
+      <p class="description">
+        Half banana. Half cat.<br>
+        100% unpredictable.
+        Meet your new favorite 3D creature.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#viewer" class="primary-button">
+          MEET THE CAT <span>↗</span>
+        </a>
+        <span class="edition">NO. 001 / ORIGINAL CHARACTER</span>
       </div>
-    </model-viewer>  
-    <script src="script.js"></script>
-    <!-- Loads <model-viewer> for browsers: -->
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.4.0/model-viewer.min.js"></script>
-  </body>
+
+      <div class="mini-stats">
+        <div>
+          <strong>3D</strong>
+          <span>INTERACTIVE</span>
+        </div>
+        <div>
+          <strong>360°</strong>
+          <span>VIEW MODE</span>
+        </div>
+        <div>
+          <strong>AR</strong>
+          <span>REAL WORLD</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="viewer-section" id="viewer">
+      <div class="viewer-label">
+        <span>01 / LIVE MODEL</span>
+        <span class="live-indicator">● LIVE</span>
+      </div>
+
+      <div class="model-wrap">
+        <div class="model-orbit orbit-one"></div>
+        <div class="model-orbit orbit-two"></div>
+        <div class="model-halo"></div>
+
+        <div class="model-tag tag-top">
+          <span>✳</span> DIGITAL CREATURE
+        </div>
+
+        <model-viewer
+          id="banana-model"
+          src="./bananacat.glb"
+          poster="./poster.webp"
+          alt="3D Banana Cat character"
+          camera-controls
+          auto-rotate
+          rotation-per-second="18deg"
+          autoplay
+          animation-name="bananaBones|hiiiiiiiii"
+          shadow-intensity="1"
+          exposure="1.1"
+          tone-mapping="neutral"
+          environment-image="neutral"
+          camera-orbit="-8.75deg 76.5deg 3.786m"
+          field-of-view="30deg"
+          interaction-prompt="auto"
+          ar
+          ar-modes="webxr scene-viewer quick-look">
+
+          <div class="progress-container" slot="progress-bar">
+            <div class="progress-track">
+              <div class="progress-fill"></div>
+            </div>
+            <span>LOADING CHARACTER...</span>
+          </div>
+
+          <button slot="ar-button" id="ar-button">
+            VIEW IN YOUR SPACE ↗
+          </button>
+        </model-viewer>
+
+        <div class="model-tag tag-bottom">
+          DRAG TO ROTATE <span>↻</span>
+        </div>
+      </div>
+
+      <div class="viewer-controls">
+        <span>INTERACTION</span>
+        <button id="rotate-toggle" class="control-button">
+          <span>Ⅱ</span> PAUSE ROTATION
+        </button>
+      </div>
+    </section>
+
+    <aside class="character-card">
+      <div class="card-number">CHARACTER / 001</div>
+
+      <div class="card-emoji">🍌</div>
+
+      <h2>Banana<br>Cat</h2>
+      <p>A rare species of adorable chaos.</p>
+
+      <div class="card-divider"></div>
+
+      <div class="attribute">
+        <span>RARITY</span>
+        <strong>LEGENDARY</strong>
+      </div>
+      <div class="attribute">
+        <span>MOOD</span>
+        <strong>HAPPY</strong>
+      </div>
+      <div class="attribute">
+        <span>SPECIES</span>
+        <strong>CAT / BANANA</strong>
+      </div>
+
+      <div class="card-footer">
+        <span>EST. 2025</span>
+        <span>★ 001</span>
+      </div>
+    </aside>
+
+    <div class="bottom-note">
+      <span>SCROLL TO EXPLORE</span>
+      <span class="scroll-line"></span>
+      <span>MADE FOR THE INTERNET</span>
+    </div>
+  </main>
+</body>
 </html>
